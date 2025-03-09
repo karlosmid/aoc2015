@@ -1,19 +1,48 @@
 defmodule Day01Test do
   use ExUnit.Case
 
-  test "day0101" do
-    assert Day01.part1("data/day01/day0101.txt") == 0
+  describe "part1" do
+    test "empty input" do
+      assert Day01.part1(Day01.string_as_charlist("")) == 0
+    end
+
+    test "(((" do
+      assert Day01.part1(Day01.string_as_charlist("(((")) == 3
+    end
+
+    test "()(" do
+      assert Day01.part1(Day01.string_as_charlist("()(")) == 1
+    end
+
+    test "puzzle from file" do
+      assert Day01.part1(Day01.read_file_as_charlist("data/day01/day01.txt")) == 232
+    end
   end
 
-  test "day0102" do
-    assert Day01.part1("data/day01/day0102.txt") == 3
-  end
+  describe "part2" do
+    test "empty input" do
+      assert Day01.part2(Day01.string_as_charlist("")) == "We never reached the basement"
+    end
 
-  test "day0103" do
-    assert Day01.part1("data/day01/day0103.txt") == 1
-  end
+    test ")" do
+      assert Day01.part2(Day01.string_as_charlist(")")) == 1
+    end
 
-  test "puzzle" do
-    assert Day01.part1("data/day01/day01.txt") == 232
+    test "(((" do
+      assert Day01.part2(Day01.string_as_charlist("(((")) == "We never reached the basement"
+    end
+
+    test "()())" do
+      assert Day01.part2(Day01.string_as_charlist("()())")) == 5
+    end
+
+    test "(()((((())))))))))))" do
+      assert Day01.part2(Day01.string_as_charlist("(()((((()))))))))))))")) == 15
+    end
+
+    test "puzzle from file" do
+      assert Day01.part2(Day01.read_file_as_charlist("data/day01/day01.txt")) == 1783
+    end
+
   end
 end
