@@ -1,0 +1,132 @@
+diff --git a/aoc2015/data/day01/day0101.txt b/aoc2015/data/day01/day0101.txt
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/aoc2015/data/day01/day0102.txt b/aoc2015/data/day01/day0102.txt
+deleted file mode 100644
+index 76d11bf..0000000
+--- a/aoc2015/data/day01/day0102.txt
++++ /dev/null
+@@ -1 +0,0 @@
+-(((
+\ No newline at end of file
+diff --git a/aoc2015/data/day01/day0103.txt b/aoc2015/data/day01/day0103.txt
+deleted file mode 100644
+index 7526f3a..0000000
+--- a/aoc2015/data/day01/day0103.txt
++++ /dev/null
+@@ -1 +0,0 @@
+-()(
+\ No newline at end of file
+diff --git a/aoc2015/lib/day01.ex b/aoc2015/lib/day01.ex
+index 4fc4d1f..6930dfd 100644
+--- a/aoc2015/lib/day01.ex
++++ b/aoc2015/lib/day01.ex
+@@ -1,28 +1,31 @@
+ defmodule Day01 do
+-  def part1(input) do
+-    part1(read_file_as_charlist(input), 0)
+-  end
++  def part1(input), do: part1(input, 0)
+ 
+   defp part1([], floor), do: floor
+   defp part1([?( | rest], floor), do: part1(rest, floor + 1)
+   defp part1([?) | rest], floor), do: part1(rest, floor - 1)
+ 
+   def part2(input) do
+-    input
+-    |> String.graphemes()
+-    |> Enum.with_index(1)
+-    |> Enum.reduce_while(0, fn
+-      {"(", _pos}, -1 -> {:halt, -1}
+-      {")", pos}, 0 -> {:halt, pos}
+-      {"(", _pos}, acc -> {:cont, acc + 1}
+-      {")", _pos}, acc -> {:cont, acc - 1}
+-    end)
++    part2(input, 0, 1)
+   end
+ 
+-  defp read_file_as_charlist(path) do
++  defp part2(_, -1, pos), do: pos - 1
++
++  defp part2([], _floor, _pos), do: "We never reached the basement"
++
++  defp part2([?( | rest], floor, pos), do: part2(rest, floor + 1, pos + 1)
++  defp part2([?) | rest], floor, pos), do: part2(rest, floor - 1, pos + 1)
++
++
++  def read_file_as_charlist(path) do
+     path
+-    |> File.stream!([], 8192)
++    |> File.stream!([], 1)
+     |> Enum.join()
+     |> String.to_charlist()
+   end
++
++  def string_as_charlist(string) do
++    string
++    |> String.to_charlist()
++  end
+ end
+diff --git a/aoc2015/test/day01/day01_test.exs b/aoc2015/test/day01/day01_test.exs
+index 8d1bd27..a75e4b0 100644
+--- a/aoc2015/test/day01/day01_test.exs
++++ b/aoc2015/test/day01/day01_test.exs
+@@ -1,19 +1,48 @@
+ defmodule Day01Test do
+   use ExUnit.Case
+ 
+-  test "day0101" do
+-    assert Day01.part1("data/day01/day0101.txt") == 0
+-  end
++  describe "part1" do
++    test "empty input" do
++      assert Day01.part1(Day01.string_as_charlist("")) == 0
++    end
+ 
+-  test "day0102" do
+-    assert Day01.part1("data/day01/day0102.txt") == 3
+-  end
++    test "(((" do
++      assert Day01.part1(Day01.string_as_charlist("(((")) == 3
++    end
++
++    test "()(" do
++      assert Day01.part1(Day01.string_as_charlist("()(")) == 1
++    end
+ 
+-  test "day0103" do
+-    assert Day01.part1("data/day01/day0103.txt") == 1
++    test "puzzle from file" do
++      assert Day01.part1(Day01.read_file_as_charlist("data/day01/day01.txt")) == 232
++    end
+   end
+ 
+-  test "puzzle" do
+-    assert Day01.part1("data/day01/day01.txt") == 232
++  describe "part2" do
++    test "empty input" do
++      assert Day01.part2(Day01.string_as_charlist("")) == "We never reached the basement"
++    end
++
++    test ")" do
++      assert Day01.part2(Day01.string_as_charlist(")")) == 1
++    end
++
++    test "(((" do
++      assert Day01.part2(Day01.string_as_charlist("(((")) == "We never reached the basement"
++    end
++
++    test "()())" do
++      assert Day01.part2(Day01.string_as_charlist("()())")) == 5
++    end
++
++    test "(()((((())))))))))))" do
++      assert Day01.part2(Day01.string_as_charlist("(()((((()))))))))))))")) == 15
++    end
++
++    test "puzzle from file" do
++      assert Day01.part2(Day01.read_file_as_charlist("data/day01/day01.txt")) == 1783
++    end
++
+   end
+ end

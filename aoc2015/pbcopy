@@ -1,0 +1,76 @@
+diff --git a/aoc2015/lib/day01.ex b/aoc2015/lib/day01.ex
+index 6930dfd..30c487a 100644
+--- a/aoc2015/lib/day01.ex
++++ b/aoc2015/lib/day01.ex
+@@ -15,17 +15,4 @@ defmodule Day01 do
+ 
+   defp part2([?( | rest], floor, pos), do: part2(rest, floor + 1, pos + 1)
+   defp part2([?) | rest], floor, pos), do: part2(rest, floor - 1, pos + 1)
+-
+-
+-  def read_file_as_charlist(path) do
+-    path
+-    |> File.stream!([], 1)
+-    |> Enum.join()
+-    |> String.to_charlist()
+-  end
+-
+-  def string_as_charlist(string) do
+-    string
+-    |> String.to_charlist()
+-  end
+ end
+diff --git a/aoc2015/test/day01/day01_test.exs b/aoc2015/test/day01/day01_test.exs
+deleted file mode 100644
+index a75e4b0..0000000
+--- a/aoc2015/test/day01/day01_test.exs
++++ /dev/null
+@@ -1,48 +0,0 @@
+-defmodule Day01Test do
+-  use ExUnit.Case
+-
+-  describe "part1" do
+-    test "empty input" do
+-      assert Day01.part1(Day01.string_as_charlist("")) == 0
+-    end
+-
+-    test "(((" do
+-      assert Day01.part1(Day01.string_as_charlist("(((")) == 3
+-    end
+-
+-    test "()(" do
+-      assert Day01.part1(Day01.string_as_charlist("()(")) == 1
+-    end
+-
+-    test "puzzle from file" do
+-      assert Day01.part1(Day01.read_file_as_charlist("data/day01/day01.txt")) == 232
+-    end
+-  end
+-
+-  describe "part2" do
+-    test "empty input" do
+-      assert Day01.part2(Day01.string_as_charlist("")) == "We never reached the basement"
+-    end
+-
+-    test ")" do
+-      assert Day01.part2(Day01.string_as_charlist(")")) == 1
+-    end
+-
+-    test "(((" do
+-      assert Day01.part2(Day01.string_as_charlist("(((")) == "We never reached the basement"
+-    end
+-
+-    test "()())" do
+-      assert Day01.part2(Day01.string_as_charlist("()())")) == 5
+-    end
+-
+-    test "(()((((())))))))))))" do
+-      assert Day01.part2(Day01.string_as_charlist("(()((((()))))))))))))")) == 15
+-    end
+-
+-    test "puzzle from file" do
+-      assert Day01.part2(Day01.read_file_as_charlist("data/day01/day01.txt")) == 1783
+-    end
+-
+-  end
+-end
