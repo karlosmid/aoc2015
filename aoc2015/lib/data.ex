@@ -16,5 +16,4 @@ defmodule Data do
     |> File.stream!([], :line)
     |> Enum.map(&String.trim/1)
   end
-
 end
