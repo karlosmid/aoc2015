@@ -23,7 +23,7 @@ defmodule Day02Test do
     end
 
     test "puzzle from file" do
-      assert Day02.part1(Data.read_file_as_list_of_strings("data/day02/day02.txt")) == 1_588_178
+      assert Day02.part1(Data.read_file_as_list_of_strings("data/day02.txt")) == 1_588_178
     end
   end
 
@@ -33,7 +33,7 @@ defmodule Day02Test do
     end
 
     test "puzzle from file" do
-      assert Day02.part2(Data.read_file_as_list_of_strings("data/day02/day02.txt")) == 3_783_758
+      assert Day02.part2(Data.read_file_as_list_of_strings("data/day02.txt")) == 3_783_758
     end
   end
 end

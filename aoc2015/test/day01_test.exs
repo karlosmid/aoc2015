@@ -15,7 +15,7 @@ defmodule Day01Test do
     end
 
     test "puzzle from file" do
-      assert Day01.part1(Data.read_file_as_charlist("data/day01/day01.txt")) == 232
+      assert Day01.part1(Data.read_file_as_charlist("data/day01.txt")) == 232
     end
   end
 
@@ -41,7 +41,7 @@ defmodule Day01Test do
     end
 
     test "puzzle from file" do
-      assert Day01.part2(Data.read_file_as_charlist("data/day01/day01.txt")) == 1783
+      assert Day01.part2(Data.read_file_as_charlist("data/day01.txt")) == 1783
     end
   end
 end
