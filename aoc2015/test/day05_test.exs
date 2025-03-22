@@ -55,4 +55,41 @@ defmodule Day05Test do
       assert Day05.part1(input) == 258
     end
   end
+
+  describe "part2/1" do
+    test "empty list returns 0" do
+      assert Day05.part2([]) == 0
+    end
+
+    test "qjhvhtzxzqqjkmpb is nice" do
+      assert Day05.part2(["qjhvhtzxzqqjkmpb"]) == 1
+    end
+
+    test "xxyxx is nice" do
+      assert Day05.part2(["xxyxx"]) == 1
+    end
+
+    test "uurcxstgmygtbstg is not nice" do
+      assert Day05.part2(["uurcxstgmygtbstg"]) == 0
+    end
+
+    test "ieodomkazucvgmuy is not nice" do
+      assert Day05.part2(["ieodomkazucvgmuy"]) == 0
+    end
+
+    test "example from puzzle" do
+      input = [
+        "qjhvhtzxzqqjkmpb",
+        "xxyxx",
+        "uurcxstgmygtbstg",
+        "ieodomkazucvgmuy"
+      ]
+      assert Day05.part2(input) == 2
+    end
+
+    test "puzzle input" do
+      input = Data.read_file_as_list_of_strings("data/day05.txt")
+      assert Day05.part2(input) == 53
+    end
+  end
 end
