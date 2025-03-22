@@ -1,19 +1,21 @@
 defmodule Day05 do
-  def part1(input) do
-    part1(input, 0)
+
+  def part1(input), do: part(input, &nice_word?/1)
+  def part(input, nice_word_fn) do
+    part(input, nice_word_fn, 0)
   end
 
-  defp part1([], no_of_nice_words), do: no_of_nice_words
+  defp part([], _nice_word_fn, no_of_nice_words), do: no_of_nice_words
 
-  defp part1([word | rest], no_of_nice_words) do
-    if(nice_word?(word)) do
-      part1(rest, no_of_nice_words + 1)
+  defp part([word | rest], nice_word_fn, no_of_nice_words) do
+    if(nice_word_fn.(word)) do
+      part(rest, nice_word_fn, no_of_nice_words + 1)
     else
-      part1(rest, no_of_nice_words)
+      part(rest, nice_word_fn, no_of_nice_words)
     end
   end
 
-  defp nice_word?(word) do
+  def nice_word?(word) do
     cond do
       String.contains?(word, ["ab", "cd", "pq", "xy"]) -> false
       check_vowles(String.to_charlist(word)) == true && check_double_letters(word) == true -> true
