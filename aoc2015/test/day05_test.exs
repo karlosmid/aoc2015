@@ -84,6 +84,7 @@ defmodule Day05Test do
         "uurcxstgmygtbstg",
         "ieodomkazucvgmuy"
       ]
+
       assert Day05.part2(input) == 2
     end
 

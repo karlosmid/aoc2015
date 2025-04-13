@@ -24,9 +24,9 @@ defmodule Day05 do
       true -> false
     end
   end
-  
+
   def nice_word_two?(word) do
-      check_pair_letters(word) == true and check_symetric_letters(word) == true
+    check_pair_letters(word) == true and check_symetric_letters(word) == true
   end
 
   defp check_vowles(vowles) do

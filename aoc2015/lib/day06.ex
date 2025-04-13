@@ -51,6 +51,7 @@ defmodule Day06 do
 
   defp apply_instruction(grid, {:on, {{start_x, start_y}, {end_x, end_y}}}) do
     grid_on = %{}
+
     for x <- start_x..end_x, y <- start_y..end_y do
       Map.put(grid_on, {x, y}, true)
     end
@@ -59,6 +60,7 @@ defmodule Day06 do
 
   defp apply_instruction(grid, {:off, {{start_x, start_y}, {end_x, end_y}}}) do
     grid_off = %{}
+
     for x <- start_x..end_x, y <- start_y..end_y do
       Map.put(grid_off, {x, y}, false)
     end
@@ -67,6 +69,7 @@ defmodule Day06 do
 
   defp apply_instruction(grid, {:toggle, {{start_x, start_y}, {end_x, end_y}}}) do
     grid_toggle = %{}
+
     for x <- start_x..end_x, y <- start_y..end_y do
       Map.put(grid_toggle, {x, y}, !Map.get(grid, {x, y}, false))
     end
@@ -75,6 +78,7 @@ defmodule Day06 do
 
   defp apply_brightness_instruction(grid, {:on, {{start_x, start_y}, {end_x, end_y}}}) do
     grid_on = %{}
+
     for x <- start_x..end_x, y <- start_y..end_y do
       Map.put(grid_on, {x, y}, Map.get(grid, {x, y}, 0) + 1)
     end
@@ -83,6 +87,7 @@ defmodule Day06 do
 
   defp apply_brightness_instruction(grid, {:off, {{start_x, start_y}, {end_x, end_y}}}) do
     grid_off = %{}
+
     for x <- start_x..end_x, y <- start_y..end_y do
       Map.put(grid_off, {x, y}, max(0, Map.get(grid, {x, y}, 0) - 1))
     end
@@ -91,9 +96,10 @@ defmodule Day06 do
 
   defp apply_brightness_instruction(grid, {:toggle, {{start_x, start_y}, {end_x, end_y}}}) do
     grid_toggle = %{}
+
     for x <- start_x..end_x, y <- start_y..end_y do
       Map.put(grid_toggle, {x, y}, Map.get(grid, {x, y}, 0) + 2)
     end
     |> Enum.reduce(grid, &Map.merge(&2, &1))
   end
-end 
+end
