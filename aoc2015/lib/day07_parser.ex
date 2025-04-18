@@ -35,13 +35,13 @@ defmodule Day07Parser do
     |> map({__MODULE__, :wrap_single, []})
     |> ignore(whitespace)
     |> concat(
-    choice([
-      string("AND") |> replace(:and),
-      string("OR") |> replace(:or),
-      string("LSHIFT") |> replace(:lshift),
-      string("RSHIFT") |> replace(:rshift)
-    ])
-    |> map({__MODULE__, :wrap_single, []})
+      choice([
+        string("AND") |> replace(:and),
+        string("OR") |> replace(:or),
+        string("LSHIFT") |> replace(:lshift),
+        string("RSHIFT") |> replace(:rshift)
+      ])
+      |> map({__MODULE__, :wrap_single, []})
     )
     |> ignore(whitespace)
     |> concat(value_or_wire |> map({__MODULE__, :wrap_single, []}))

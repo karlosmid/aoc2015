@@ -4,11 +4,9 @@ defmodule Day07 do
   def run(input) do
     instructions =
       input
-      |> String.split("\n", trim: true)
       |> Enum.map(&Day07Parser.parse_instruction/1)
       |> Enum.map(fn {:ok, [parsed], _, _, _, _} -> parsed end)
       |> Enum.into(%{})
-
     evaluate("a", instructions, %{})
   end
 

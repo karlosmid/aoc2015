@@ -10,7 +10,7 @@ defmodule Day07Test do
       x -> a
       """
 
-      assert Day07.run(input) == 123
+      assert Day07.run(String.split(input, "\n", trim: true)) == 123
     end
 
     test "AND operation" do
@@ -21,7 +21,7 @@ defmodule Day07Test do
       d -> a
       """
 
-      assert Day07.run(input) == 72
+      assert Day07.run(String.split(input, "\n", trim: true)) == 72
     end
 
     test "OR operation" do
@@ -31,7 +31,7 @@ defmodule Day07Test do
       x OR y -> e
       """
 
-      assert Day07.run(input <> "\ne -> a") == 507
+      assert Day07.run(String.split(input <> "\ne -> a", "\n", trim: true)) == 507
     end
 
     test "LSHIFT operation" do
@@ -40,7 +40,7 @@ defmodule Day07Test do
       x LSHIFT 2 -> f
       """
 
-      assert Day07.run(input <> "\nf -> a") == 492
+      assert Day07.run(String.split(input <> "\nf -> a", "\n", trim: true)) == 492
     end
 
     test "RSHIFT operation" do
@@ -49,7 +49,7 @@ defmodule Day07Test do
       y RSHIFT 2 -> g
       """
 
-      assert Day07.run(input <> "\ng -> a") == 114
+      assert Day07.run(String.split(input <> "\ng -> a", "\n", trim: true)) == 114
     end
 
     test "NOT operation" do
@@ -58,7 +58,7 @@ defmodule Day07Test do
       NOT x -> h
       """
 
-      assert Day07.run(input <> "\nh -> a") == 65412
+      assert Day07.run(String.split(input <> "\nh -> a", "\n", trim: true)) == 65412
     end
 
     test "chained dependencies" do
@@ -69,11 +69,12 @@ defmodule Day07Test do
       z -> a
       """
 
-      assert Day07.run(input) == 123
+      assert Day07.run(String.split(input, "\n", trim: true)) == 123
     end
 
     test "example from AoC Day 7 description" do
       input = """
+      d -> a
       123 -> x
       456 -> y
       x AND y -> d
@@ -82,10 +83,15 @@ defmodule Day07Test do
       y RSHIFT 2 -> g
       NOT x -> h
       NOT y -> i
-      d -> a
       """
 
+      input = String.split(input, "\n", trim: true)
       assert Day07.run(input) == 72
+    end
+
+    test "part1 input data" do
+      input = Data.read_file_as_list_of_strings("data/day07.txt")
+      assert Day07.run(input) == 956
     end
   end
 end
