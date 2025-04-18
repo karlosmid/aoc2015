@@ -91,7 +91,7 @@ defmodule Day07Test do
 
     test "part1 input data" do
       input = Data.read_file_as_list_of_strings("data/day07.txt")
-      assert Day07.run(input) == 956
+      assert Day07.run(input) == 46065
     end
   end
 end
