@@ -1,15 +1,26 @@
 defmodule Day07 do
   import Bitwise
 
-  def run(input) do
-    instructions =
-      input
-      |> Enum.map(&Day07Parser.parse_instruction/1)
-      |> Enum.map(fn {:ok, [parsed], _, _, _, _} -> parsed end)
-      |> Enum.into(%{})
+  def part1(input) do
+    instructions = get_instructions(input)
 
     {result, _cache} = evaluate("a", instructions, %{})
     result
+  end
+
+  def part2(input) do
+    instructions = get_instructions(input)
+    instructions = Map.put(instructions, "b", {:value, 46065})
+
+    {result, _cache} = evaluate("a", instructions, %{})
+    result
+  end
+
+  defp get_instructions(input) do
+    input
+    |> Enum.map(&Day07Parser.parse_instruction/1)
+    |> Enum.map(fn {:ok, [parsed], _, _, _, _} -> parsed end)
+    |> Enum.into(%{})
   end
 
   defp evaluate(x, _instructions, cache) when is_integer(x), do: {x, cache}

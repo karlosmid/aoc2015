@@ -10,7 +10,7 @@ defmodule Day07Test do
       x -> a
       """
 
-      assert Day07.run(String.split(input, "\n", trim: true)) == 123
+      assert Day07.part1(String.split(input, "\n", trim: true)) == 123
     end
 
     test "AND operation" do
@@ -21,7 +21,7 @@ defmodule Day07Test do
       d -> a
       """
 
-      assert Day07.run(String.split(input, "\n", trim: true)) == 72
+      assert Day07.part1(String.split(input, "\n", trim: true)) == 72
     end
 
     test "OR operation" do
@@ -31,7 +31,7 @@ defmodule Day07Test do
       x OR y -> e
       """
 
-      assert Day07.run(String.split(input <> "\ne -> a", "\n", trim: true)) == 507
+      assert Day07.part1(String.split(input <> "\ne -> a", "\n", trim: true)) == 507
     end
 
     test "LSHIFT operation" do
@@ -40,7 +40,7 @@ defmodule Day07Test do
       x LSHIFT 2 -> f
       """
 
-      assert Day07.run(String.split(input <> "\nf -> a", "\n", trim: true)) == 492
+      assert Day07.part1(String.split(input <> "\nf -> a", "\n", trim: true)) == 492
     end
 
     test "RSHIFT operation" do
@@ -49,7 +49,7 @@ defmodule Day07Test do
       y RSHIFT 2 -> g
       """
 
-      assert Day07.run(String.split(input <> "\ng -> a", "\n", trim: true)) == 114
+      assert Day07.part1(String.split(input <> "\ng -> a", "\n", trim: true)) == 114
     end
 
     test "NOT operation" do
@@ -58,7 +58,7 @@ defmodule Day07Test do
       NOT x -> h
       """
 
-      assert Day07.run(String.split(input <> "\nh -> a", "\n", trim: true)) == 65412
+      assert Day07.part1(String.split(input <> "\nh -> a", "\n", trim: true)) == 65412
     end
 
     test "chained dependencies" do
@@ -69,7 +69,7 @@ defmodule Day07Test do
       z -> a
       """
 
-      assert Day07.run(String.split(input, "\n", trim: true)) == 123
+      assert Day07.part1(String.split(input, "\n", trim: true)) == 123
     end
 
     test "example from AoC Day 7 description" do
@@ -86,12 +86,17 @@ defmodule Day07Test do
       """
 
       input = String.split(input, "\n", trim: true)
-      assert Day07.run(input) == 72
+      assert Day07.part1(input) == 72
     end
 
     test "part1 input data" do
       input = Data.read_file_as_list_of_strings("data/day07.txt")
-      assert Day07.run(input) == 46065
+      assert Day07.part1(input) == 46065
+    end
+
+    test "part2 input data" do
+      input = Data.read_file_as_list_of_strings("data/day07.txt")
+      assert Day07.part2(input) == 14143
     end
   end
 end
