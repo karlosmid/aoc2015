@@ -16,6 +16,12 @@ defmodule Day08 do
     |> Enum.sum()
   end
 
+  def part2(input) do
+    input
+    |> Enum.map(&code_vs_memory_part2/1)
+    |> Enum.sum()
+  end
+
   defp code_vs_memory(string) do
     code_length = String.length(string)
     decoded = string
@@ -24,6 +30,25 @@ defmodule Day08 do
     memory_length = String.length(decoded)
     diff = code_length - memory_length
     diff
+  end
+
+  defp code_vs_memory_part2(string) do
+    code_length = String.length(string)
+    encoded = string
+      |> String.replace(~r/^\"|\"$/, "XXX")
+      |> encode()
+    encoded_length = String.length(encoded)
+    encoded_length - code_length
+  end
+
+  defp encode(string) do
+    string
+    # Replace \\ with \
+    |> String.replace("\\\\", "BBBB")
+    # Replace \" with "
+    |> String.replace("\\\"", "BBBD")
+    # Replace \x?? with 1 character
+    |> String.replace(~r/\\x[0-9a-fA-F]{2}/, "BBXNN")
   end
 
   defp decode(string) do
