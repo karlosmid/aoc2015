@@ -22,9 +22,12 @@ defmodule Day08Test do
   end
 
   test "part1 with basic string patterns" do
-    assert Day08.part1(["\"\""]) == 2      # Empty string
-    assert Day08.part1(["\"a\""]) == 2     # Single character
-    assert Day08.part1(["\"\\\"\""]) == 3  # Escaped quote
+    # Empty string
+    assert Day08.part1(["\"\""]) == 2
+    # Single character
+    assert Day08.part1(["\"a\""]) == 2
+    # Escaped quote
+    assert Day08.part1(["\"\\\"\""]) == 3
   end
 
   test "part1 with double backslash" do
@@ -32,7 +35,7 @@ defmodule Day08Test do
   end
 
   test "part1 problematic line" do
-    assert Day08.part1(["\"ubgxxcvnltzaucrzg\\\\xcez\""]) == 3 
+    assert Day08.part1(["\"ubgxxcvnltzaucrzg\\\\xcez\""]) == 3
   end
 
   test "part1 with multiple strings" do
@@ -49,7 +52,6 @@ defmodule Day08Test do
   test "part1 with input data" do
     input = Data.read_file_as_list_of_strings("data/day08.txt")
     assert Day08.part1(input) == 1342
-
   end
 
   test "part1_with_eval with input data" do
@@ -59,31 +61,31 @@ defmodule Day08Test do
 
   test "part2 with empty string" do
     input = [
-      "\"\"",
+      "\"\""
     ]
 
     assert Day08.part2(input) == 4
   end
-  
+
   test "part2 with abc" do
     input = [
-      "\"abc\"",
+      "\"abc\""
     ]
 
     assert Day08.part2(input) == 4
   end
-  
+
   test "part2 with aaaDaaa" do
     input = [
-      "\"aaa\\\"aaa\"",
+      "\"aaa\\\"aaa\""
     ]
 
     assert Day08.part2(input) == 6
   end
-  
+
   test "part2 with Bx27" do
     input = [
-      "\"\\x27\"",
+      "\"\\x27\""
     ]
 
     assert Day08.part2(input) == 5
@@ -93,6 +95,4 @@ defmodule Day08Test do
     input = Data.read_file_as_list_of_strings("data/day08.txt")
     assert Day08.part2(input) == 2074
   end
-
-  
 end

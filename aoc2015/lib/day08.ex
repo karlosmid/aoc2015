@@ -1,5 +1,4 @@
 defmodule Day08 do
-
   def part1_with_eval(input) do
     input
     |> Enum.map(&String.trim/1)
@@ -10,6 +9,7 @@ defmodule Day08 do
     end)
     |> Enum.sum()
   end
+
   def part1(input) do
     input
     |> Enum.map(&code_vs_memory/1)
@@ -24,9 +24,12 @@ defmodule Day08 do
 
   defp code_vs_memory(string) do
     code_length = String.length(string)
-    decoded = string
+
+    decoded =
+      string
       |> String.replace(~r/^\"|\"$/, "")
       |> decode()
+
     memory_length = String.length(decoded)
     diff = code_length - memory_length
     diff
@@ -34,9 +37,12 @@ defmodule Day08 do
 
   defp code_vs_memory_part2(string) do
     code_length = String.length(string)
-    encoded = string
+
+    encoded =
+      string
       |> String.replace(~r/^\"|\"$/, "XXX")
       |> encode()
+
     encoded_length = String.length(encoded)
     encoded_length - code_length
   end

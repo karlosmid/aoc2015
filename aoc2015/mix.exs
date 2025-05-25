@@ -5,7 +5,7 @@ defmodule Aoc2015.MixProject do
     [
       app: :aoc2015,
       version: "0.1.0",
-      elixir: "~> 1.17",
+      elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -20,8 +20,6 @@ defmodule Aoc2015.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    [
-      {:nimble_parsec, "~> 1.4"}
-    ]
+    []
   end
 end
