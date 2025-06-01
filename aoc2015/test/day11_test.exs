@@ -75,4 +75,8 @@ defmodule Day11Test do
   test "input 1" do
     assert Day11.part1("cqjxjnds") == "cqjxxyzz"
   end
+
+  test "input 2" do
+    assert Day11.part1("cqjxxyzz") == "cqkaabcc"
+  end
 end
