@@ -16,4 +16,10 @@ defmodule Data do
     |> File.stream!([], :line)
     |> Enum.map(&String.trim/1)
   end
+
+  def read_file(path) do
+    path
+    |> File.stream!([], :line)
+    |> Enum.join()
+  end
 end
