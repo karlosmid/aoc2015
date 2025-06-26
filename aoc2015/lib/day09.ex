@@ -15,7 +15,7 @@ defmodule Day09 do
     all_routes = all_routes(cities)
 
     all_routes
-    |> Enum.map(fn route -> route_pairs(route) end)
+    |> Enum.map(fn route -> Data.pairs(route) end)
     |> Enum.map(fn route ->
       route
       |> Enum.reduce(0, fn {start, stop}, acc ->
@@ -36,7 +36,7 @@ defmodule Day09 do
       end)
 
   def all_routes(cities) do
-    permutations(cities)
+    Data.permutations(cities)
   end
 
   def cities(parsed_input) do
@@ -46,19 +46,5 @@ defmodule Day09 do
       [start | [destination | acc]]
     end)
     |> Enum.uniq()
-  end
-
-  def route_pairs(routes) do
-    routes
-    |> Enum.chunk_every(2, 1, :discard)
-    |> Enum.map(fn [start, stop] ->
-      {start, stop}
-    end)
-  end
-
-  def permutations([]), do: [[]]
-
-  def permutations(list) do
-    for x <- list, rest <- permutations(list -- [x]), do: [x | rest]
   end
 end

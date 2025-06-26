@@ -45,14 +45,6 @@ defmodule Day12 do
     sum_array(tail, new_sum)
   end
 
-  defp maybe_sum_element(element, sum) do
-    if is_integer(element) do
-      sum + element
-    else
-      sum
-    end
-  end
-
   def sum_object(value) do
     if not is_object_red?(value) do
       sum_object(Map.values(value), 0)

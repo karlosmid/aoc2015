@@ -61,7 +61,7 @@ defmodule Day09Test do
       "Belfast"
     ]
 
-    assert Day09.route_pairs(input) == [
+    assert Data.pairs(input) == [
              {"London", "Dublin"},
              {"Dublin", "Belfast"}
            ]

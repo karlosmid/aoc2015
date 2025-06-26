@@ -22,4 +22,18 @@ defmodule Data do
     |> File.stream!([], :line)
     |> Enum.join()
   end
+
+  def permutations([]), do: [[]]
+
+  def permutations(list) do
+    for x <- list, rest <- permutations(list -- [x]), do: [x | rest]
+  end
+
+  def pairs(routes) do
+    routes
+    |> Enum.chunk_every(2, 1, :discard)
+    |> Enum.map(fn [start, stop] ->
+      {start, stop}
+    end)
+  end
 end
