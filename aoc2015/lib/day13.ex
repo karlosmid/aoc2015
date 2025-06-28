@@ -1,6 +1,6 @@
 defmodule Day13 do
-  def part1(input) do
-    input_parsed = parse(input)
+  def part1(input, include_me \\ []) do
+    input_parsed = [parse(input) | include_me] |> List.flatten()
 
     input_parsed
     |> all_persons()
@@ -12,7 +12,7 @@ defmodule Day13 do
   end
 
   defp sum_happiness(table, input_parsed) do
-    Data.pairs(table) ++ [{List.last(table), List.first(table)}]
+    (Data.pairs(table) ++ [{List.last(table), List.first(table)}])
     |> Enum.map(fn {person1, person2} ->
       Enum.find(input_parsed, fn %{person: person, neighbor: neighbor} ->
         person == person1 and neighbor == person2

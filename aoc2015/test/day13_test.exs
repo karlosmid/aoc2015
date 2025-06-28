@@ -54,6 +54,31 @@ defmodule Day13Test do
 
   test "part1" do
     input = Data.read_file_as_list_of_strings("data/day13.txt")
-    assert Day13.part1(input) == 330
+    assert Day13.part1(input) == 709
+  end
+
+  test "part2" do
+    input = Data.read_file_as_list_of_strings("data/day13.txt")
+
+    my_input = [
+      %{person: "Karlo", neighbor: "Alice", amount: 0},
+      %{person: "Karlo", neighbor: "Bob", amount: 0},
+      %{person: "Karlo", neighbor: "Carol", amount: 0},
+      %{person: "Karlo", neighbor: "David", amount: 0},
+      %{person: "Karlo", neighbor: "Eric", amount: 0},
+      %{person: "Karlo", neighbor: "Frank", amount: 0},
+      %{person: "Karlo", neighbor: "George", amount: 0},
+      %{person: "Karlo", neighbor: "Mallory", amount: 0},
+      %{person: "Alice", neighbor: "Karlo", amount: 0},
+      %{person: "Bob", neighbor: "Karlo", amount: 0},
+      %{person: "Carol", neighbor: "Karlo", amount: 0},
+      %{person: "David", neighbor: "Karlo", amount: 0},
+      %{person: "Eric", neighbor: "Karlo", amount: 0},
+      %{person: "Frank", neighbor: "Karlo", amount: 0},
+      %{person: "George", neighbor: "Karlo", amount: 0},
+      %{person: "Mallory", neighbor: "Karlo", amount: 0}
+    ]
+
+    assert Day13.part1(input, my_input) == 668
   end
 end
