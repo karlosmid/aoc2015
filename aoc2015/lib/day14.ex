@@ -37,4 +37,31 @@ defmodule Day14 do
     end)
     |> Enum.max_by(& &1.distance)
   end
+
+  def part2(input, total_duration) do
+    parse(input)
+    |> Enum.map(fn deer -> Map.put(deer, :points, 0) end)
+    |> round(1, total_duration)
+  end
+
+  def round(input, step, total_duration) when step == total_duration,
+    do: Enum.max_by(input, & &1.points)
+
+  def round(input, step, total_duration) do
+    with_distance =
+      Enum.map(input, fn deer ->
+        Map.put(deer, :distance, distance(deer.speed, deer.duration, deer.rest, step))
+      end)
+
+    max_distance = Enum.max_by(with_distance, & &1.distance).distance
+
+    Enum.map(with_distance, fn deer ->
+      if deer.distance >= max_distance do
+        Map.put(deer, :points, deer.points + 1)
+      else
+        deer
+      end
+    end)
+    |> round(step + 1, total_duration)
+  end
 end
