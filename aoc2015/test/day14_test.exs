@@ -35,7 +35,15 @@ defmodule Day14Test do
 
   test "part2" do
     input = Data.read_file_as_list_of_strings("data/day14.txt")
-    assert Day14.part2(input, 2503) == %{distance: 2640, name: "Rudolph", duration: 8, points: 1084, rest: 165, speed: 22}
+
+    assert Day14.part2(input, 2503) == %{
+             distance: 2640,
+             name: "Rudolph",
+             duration: 8,
+             points: 1084,
+             rest: 165,
+             speed: 22
+           }
   end
 
   test "part2 example" do
@@ -44,6 +52,13 @@ defmodule Day14Test do
       "Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds."
     ]
 
-    assert Day14.part2(input, 1000) == %{distance: 1056, name: "Dancer", duration: 11, points: 689, rest: 162, speed: 16}
+    assert Day14.part2(input, 1000) == %{
+             distance: 1056,
+             name: "Dancer",
+             duration: 11,
+             points: 689,
+             rest: 162,
+             speed: 16
+           }
   end
 end
