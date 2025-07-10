@@ -35,13 +35,22 @@ defmodule Day15Test do
     assert calories == [2, 9, 1, 8]
   end
 
-  test "example" do
+  test "example part1" do
     input = [
       "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8",
       "Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3"
     ]
 
     assert Day15.part1(input) == 62_842_880
+  end
+  
+  test "example part2" do
+    input = [
+      "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8",
+      "Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3"
+    ]
+
+    assert Day15.part2(input) == 57_600_000
   end
 
   test "part1" do
@@ -51,4 +60,13 @@ defmodule Day15Test do
 
     assert result == 222_870
   end
+  
+  test "part2" do
+    result =
+      Data.read_file_as_list_of_strings("data/day15.txt")
+      |> Day15.part2()
+
+    assert result == 117_936
+  end
+
 end

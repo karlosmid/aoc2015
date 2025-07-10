@@ -58,6 +58,28 @@ defmodule Day15 do
     |> Enum.max()
   end
 
+  def part2(input) do
+    input = parse(input)
+    n = length(input)
+    capacity = get_category(input, :capacity)
+    durability = get_category(input, :durability)
+    flavour = get_category(input, :flavor)
+    texture = get_category(input, :texture)
+    calories = get_category(input, :calories)
+
+    ratios(n)
+    |> Enum.map(fn ratio ->
+      if sum_category(ratio, calories) == 500 do
+        sum_category(ratio, capacity) * sum_category(ratio, durability) *
+          sum_category(ratio, flavour) *
+          sum_category(ratio, texture)
+      else
+        0
+      end
+    end)
+    |> Enum.max()
+  end
+
   defp sum_category(ratio, category) do
     sum =
       1..length(ratio)
