@@ -43,7 +43,7 @@ defmodule Day15Test do
 
     assert Day15.part1(input) == 62_842_880
   end
-  
+
   test "example part2" do
     input = [
       "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8",
@@ -60,7 +60,7 @@ defmodule Day15Test do
 
     assert result == 222_870
   end
-  
+
   test "part2" do
     result =
       Data.read_file_as_list_of_strings("data/day15.txt")
@@ -68,5 +68,4 @@ defmodule Day15Test do
 
     assert result == 117_936
   end
-
 end
