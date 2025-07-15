@@ -8,8 +8,14 @@ defmodule Day16Test do
   end
 
   test "part1" do
-    Data.read_file_as_list_of_strings("data/day16.txt")
-    |> Day16.part1()
-    |> IO.inspect()
+    assert Data.read_file_as_list_of_strings("data/day16.txt")
+           |> Day16.part1() ==
+             %{value: 0, sue: "103"}
+  end
+
+  test "part2" do
+    assert Data.read_file_as_list_of_strings("data/day16.txt")
+           |> Day16.part2() ==
+             %{sue: %{trees: 8, cars: 2, perfumes: 1, sue: "405"}, value: true}
   end
 end

@@ -43,4 +43,25 @@ defmodule Day16 do
     end)
     |> Enum.min_by(fn value -> value.value end)
   end
+
+  def part2(input) do
+    parse(input)
+    |> Enum.map(fn sue ->
+      value =
+        Map.keys(sue)
+        |> Enum.filter(fn key -> key != :sue end)
+        |> Enum.map(fn
+          :cat -> Map.get(sue, :cat) > Map.get(@results, :cat)
+          :trees -> Map.get(sue, :trees) > Map.get(@results, :trees)
+          :pomeranians -> Map.get(sue, :pomeranians) < Map.get(@results, :pomeranians)
+          :goldfish -> Map.get(sue, :goldfish) < Map.get(@results, :goldfish)
+          key -> Map.get(sue, key) == Map.get(@results, key)
+        end)
+        |> Enum.all?()
+
+      %{sue: sue, value: value}
+    end)
+    |> Enum.filter(fn value -> value.value end)
+    |> List.first()
+  end
 end
