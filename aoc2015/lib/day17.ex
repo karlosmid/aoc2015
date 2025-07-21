@@ -72,4 +72,20 @@ defmodule Day17 do
     end)
     |> Enum.sum()
   end
+
+  def part2(list) do
+    1..length(list)
+    |> Enum.reduce_while(0, fn n, _acc ->
+      combinations =
+        combinations_without_repetition(list, n)
+        |> Enum.filter(fn x -> Enum.sum(x) == 150 end)
+        |> Enum.count()
+
+      if combinations != 0 do
+        {:halt, {combinations, n}}
+      else
+        {:cont, {combinations, n}}
+      end
+    end)
+  end
 end

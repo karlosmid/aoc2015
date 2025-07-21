@@ -110,7 +110,14 @@ defmodule Day17Test do
     assert Data.read_file_as_list_of_strings("data/day17.txt")
            |> Enum.map(&Integer.parse(&1))
            |> Enum.map(fn {number, ""} -> number end)
-           |> Day17.part1()
-           == 1638
+           |> Day17.part1() ==
+             1638
+  end
+
+  test "part2" do
+    assert Data.read_file_as_list_of_strings("data/day17.txt")
+           |> Enum.map(&Integer.parse(&1))
+           |> Enum.map(fn {number, ""} -> number end)
+           |> Day17.part2() == {17,4}
   end
 end
