@@ -17,6 +17,16 @@ defmodule Data do
     |> Enum.map(&String.trim/1)
   end
 
+  def read_file_as_list_of_lists(path) do
+    path
+    |> File.stream!([], :line)
+    |> Enum.map(fn line ->
+      String.trim(line)
+      |> String.split("")
+      |> Enum.slice(1..-2//1)
+    end)
+  end
+
   def read_file(path) do
     path
     |> File.stream!([], :line)
