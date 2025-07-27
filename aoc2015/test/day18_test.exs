@@ -10,10 +10,18 @@ defmodule Day18Test do
   end
 
   test "part1 example" do
-    assert Day18.part1("data/day18_example.txt", 4) == 4
+    assert Day18.part("data/day18_example.txt", 4, 1) == 4
   end
 
   test "part1" do
-    assert Day18.part1("data/day18.txt", 100) == 1061
+    assert Day18.part("data/day18.txt", 100, 1) == 1_061
+  end
+
+  test "part2 example" do
+    assert Day18.part("data/day18_example_2.txt", 5, 2) == 17
+  end
+
+  test "part2" do
+    assert Day18.part("data/day18.txt", 100, 2) == 1_006
   end
 end

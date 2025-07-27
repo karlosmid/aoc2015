@@ -10,19 +10,29 @@ defmodule Day18 do
     Enum.reduce(input, %{}, fn {{x, y}, state}, acc -> Map.put(acc, {x, y}, state) end)
   end
 
-  def step(grid, step, stop) do
+  def step(grid, border, step, stop, part) do
     if step > stop do
       grid
     else
       Enum.reduce(grid, %{}, fn state, acc ->
-        {{x, y}, state} = next_state(state, grid)
+        {{x, y}, state} = next_state(state, grid, border, part)
         Map.put(acc, {x, y}, state)
       end)
-      |> step(step + 1, stop)
+      |> step(border, step + 1, stop, part)
     end
   end
 
-  def next_state({{x, y}, "#"}, grid) do
+  def next_state({coordinates, "#"} = state, grid, border, 2) do
+    cond do
+      {0, 0} == coordinates -> state
+      {0, border} == coordinates -> state
+      {border, 0} == coordinates -> state
+      {border, border} == coordinates -> state
+      true -> next_state(state, grid, border, 1)
+    end
+  end
+
+  def next_state({{x, y}, "#"}, grid, _border, 1) do
     case neighbours_on({x, y}, grid) do
       2 -> {{x, y}, "#"}
       3 -> {{x, y}, "#"}
@@ -30,7 +40,17 @@ defmodule Day18 do
     end
   end
 
-  def next_state({{x, y}, "."}, grid) do
+  def next_state({coordinates, "."} = state, grid, border, 2) do
+    cond do
+      {0, 0} == coordinates -> {coordinates, "#"}
+      {0, border} == coordinates -> {coordinates, "#"}
+      {border, 0} == coordinates -> {coordinates, "#"}
+      {border, border} == coordinates -> {coordinates, "#"}
+      true -> next_state(state, grid, border, 1)
+    end
+  end
+
+  def next_state({{x, y}, "."}, grid, _border, 1) do
     case neighbours_on({x, y}, grid) do
       3 -> {{x, y}, "#"}
       _ -> {{x, y}, "."}
@@ -52,10 +72,21 @@ defmodule Day18 do
     |> Enum.count()
   end
 
-  def part1(path, steps) do
-    parse(path)
-    |> step(1, steps)
+  def part(path, steps, part) do
+    grid = parse(path)
+
+    step(grid, border_size(grid), 1, steps, part)
     |> Enum.filter(fn {_, state} -> state == "#" end)
     |> Enum.count()
+  end
+
+  def border_size(grid) do
+    border =
+    grid
+    |> Map.keys()
+    |> length
+    |> :math.sqrt()
+    |> round()
+   border - 1
   end
 end
