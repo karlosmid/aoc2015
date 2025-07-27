@@ -23,12 +23,12 @@ defmodule Day18 do
   end
 
   def next_state({coordinates, "#"} = state, grid, border, 2) do
-    cond do
-      {0, 0} == coordinates -> state
-      {0, border} == coordinates -> state
-      {border, 0} == coordinates -> state
-      {border, border} == coordinates -> state
-      true -> next_state(state, grid, border, 1)
+    case coordinates do
+      {0, 0} -> state
+      {0, ^border} -> state
+      {^border, 0} -> state
+      {^border, ^border} -> state
+      _ -> next_state(state, grid, border, 1)
     end
   end
 
@@ -41,12 +41,12 @@ defmodule Day18 do
   end
 
   def next_state({coordinates, "."} = state, grid, border, 2) do
-    cond do
-      {0, 0} == coordinates -> {coordinates, "#"}
-      {0, border} == coordinates -> {coordinates, "#"}
-      {border, 0} == coordinates -> {coordinates, "#"}
-      {border, border} == coordinates -> {coordinates, "#"}
-      true -> next_state(state, grid, border, 1)
+    case coordinates do
+      {0, 0} -> {coordinates, "#"}
+      {0, ^border} -> {coordinates, "#"}
+      {^border, 0} -> {coordinates, "#"}
+      {^border, ^border} -> {coordinates, "#"}
+      _ -> next_state(state, grid, border, 1)
     end
   end
 
@@ -82,11 +82,12 @@ defmodule Day18 do
 
   def border_size(grid) do
     border =
-    grid
-    |> Map.keys()
-    |> length
-    |> :math.sqrt()
-    |> round()
-   border - 1
+      grid
+      |> Map.keys()
+      |> length
+      |> :math.sqrt()
+      |> round()
+
+    border - 1
   end
 end
