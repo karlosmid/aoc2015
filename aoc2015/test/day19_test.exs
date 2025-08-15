@@ -55,10 +55,35 @@ defmodule Day19Test do
              {"e", "NAl"},
              {"e", "OMg"},
              "CRnCaCaCaSiRnBPTiMgArSiRnSiRnMgArSiRnCaFArTiTiBSiThFYCaFArCaCaSiThCaPBSiThSiThCaCaPTiRnPBSiThRnFArArCaCaSiThCaSiThSiRnMgArCaPTiBPRnFArSiThCaSiRnFArBCaSiRnCaPRnFArPMgYCaFArCaPTiTiTiBPBSiThCaPTiBPBSiRnFArBPBSiRnCaFArBPRnSiRnFArRnSiRnBFArCaFArCaCaCaSiThSiThCaCaPBPTiTiRnFArCaPTiBSiAlArPBCaCaCaCaCaSiRnMgArCaSiThFArThCaSiThCaSiRnCaFYCaSiRnFYFArFArCaSiRnFYFArCaSiRnBPMgArSiThPRnFArCaSiRnFArTiRnSiRnFYFArCaSiRnBFArCaSiRnTiMgArSiThCaSiThCaFArPRnFArSiRnFArTiTiTiTiBCaCaSiRnCaCaFYFArSiThCaPTiBPTiBCaSiThSiRnMgArCaF"
-           ]) == 0 
+           ]) == 0
   end
 
   test "part1 with datafile" do
     assert Day19.part1(Day19.parse(Data.read_file_as_list_of_strings("data/day19.txt"))) == 535
+  end
+
+  test "part2" do
+    assert Day19.part2(
+             [{"e", "H"}, {"e", "O"}, {"H", "HO"}, {"H", "OH"}, {"O", "HH"}, "HOH"],
+             "e"
+           )
+           |> List.flatten()
+           |> List.first() == 3
+
+    assert Day19.part2(
+             [{"e", "H"}, {"e", "O"}, {"H", "HO"}, {"H", "OH"}, {"O", "HH"}, "HOHOHO"],
+             "e"
+           )
+           |> List.flatten()
+           |> List.first() == 6
+  end
+
+  test "part2 with data file" do
+    assert Day19.part2(
+             Day19.parse(Data.read_file_as_list_of_strings("data/day19.txt")),
+             "e"
+           )
+           |> List.flatten()
+           |> List.first() == 3
   end
 end
